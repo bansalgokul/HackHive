@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express"
 import User, { UserDocument } from "../models/user.model"
 
 export const verifyTokenCookie = async (
-	req: Request & { user: string },
+	req: Request,
 	res: Response,
 	next: NextFunction
 ) => {
@@ -30,7 +30,7 @@ export const verifyTokenCookie = async (
 			}
 
 			// Hydrate req.user with the authenticated user
-			req.user = user._id
+			req.body.user = user._id
 			next()
 		})
 	} catch (error) {

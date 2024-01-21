@@ -18,8 +18,9 @@ export interface TeamDocument extends Document {
 		listedHackathon: { type: Schema.Types.ObjectId; ref: "Hackathon" }
 		customHackathon?: string
 	}
-	members: Types.Array<Types.ObjectId>
-	joinApplications: Types.Array<TeamJoinApplication>
+	members: Array<Types.ObjectId>
+	createdBy: Types.ObjectId
+	joinApplications: Array<TeamJoinApplication>
 }
 
 const teamSchema = new Schema<TeamDocument>(
@@ -42,6 +43,7 @@ const teamSchema = new Schema<TeamDocument>(
 				},
 			},
 		},
+		createdBy: { type: Schema.Types.ObjectId, ref: "User" },
 		members: [{ type: Schema.Types.ObjectId, ref: "User" }],
 		joinApplications: [
 			{
